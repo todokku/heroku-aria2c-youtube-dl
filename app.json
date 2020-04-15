@@ -1,18 +1,15 @@
 {
-  "name": "shadowsocks-chisel",
-  "description": "shadowsocks + chisel = ❤❤",
+  "name": "youtube-dl",
+  "description": "download youtube video",
   "stack": "container",
   "env": {
-    "CHISEL_AUTH": {
-      "description": "The --auth option of chisel, in the form of <user:pass>."
+    "RCLONE_CONFIG": {
+      "description": "Rclone config to mount in one line, replace line breaks with \"\\n\"",
+      "required": false
     },
-    "METHOD": {
-      "description": "Encryption method.",
-      "value": "rc4-md5"
-    },
-    "KEY": {
-      "description": "Encryption key.",
-      "generator": "secret"
+    "RCLONE_DESTINATION": {
+      "description": "Path to store your file in your Rclone drive. Must start with a forward slash.",
+      "required": false
     }
   }
 }

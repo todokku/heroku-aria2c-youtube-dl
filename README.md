@@ -5,7 +5,7 @@ shadowsocks-chisel
 
 ### Getting started
 
-Use this button [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mrluanma/shadowsocks-chisel)
+Use this button [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cxjava/heroku-aria2c-youtube-dl)
 
 Or create a Heroku app manually:
 
