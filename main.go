@@ -14,7 +14,7 @@ func main() {
 
 		fmt.Println(c.Query("url"))
 
-		cc := "cd /root/ && /root/run.sh " + c.Query("url")
+		cc := "/root/run.sh " + c.Query("url")
 		cmd := exec.Command("sh", "-c", cc)
 		stderr, _ := cmd.StderrPipe()
 		cmd.Start()
