@@ -2,11 +2,15 @@ on:
   push:
     tags:
       - "v*"
+  watch:
+    types: started
+
 name: CI
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Check out code
         uses: actions/checkout@master

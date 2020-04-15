@@ -4,33 +4,25 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"os"
 	"os/exec"
 )
 
 func main() {
 	r := gin.Default()
+	r.StaticFS("/root", http.Dir("/root/"))
 	r.GET("/d", func(c *gin.Context) {
+		uu := c.Query("url")
 
-		fmt.Println(c.Query("url"))
-
-		cc := "/root/run.sh " + c.Query("url")
-		cmd := exec.Command("sh", "-c", cc)
-		stderr, _ := cmd.StderrPipe()
-		cmd.Start()
-
-		var rs []string
-		scanner := bufio.NewScanner(stderr)
-		scanner.Split(bufio.ScanWords)
-		for scanner.Scan() {
-			m := scanner.Text()
-			fmt.Println(m)
-			rs = append(rs, m)
-		}
-		cmd.Wait()
+		go func(u string) {
+			fmt.Println(u + " start!!!!")
+			download(u)
+			fmt.Println(u + " done!!!!")
+		}(uu)
 
 		c.JSON(200, gin.H{
-			"out": rs,
+			"out": "ok",
 		})
 	})
 
@@ -39,4 +31,19 @@ func main() {
 		port = "8080"
 	}
 	r.Run(":" + port)
+}
+
+func download(u string) {
+	cc := "/root/run.sh " + u
+	cmd := exec.Command("sh", "-c", cc)
+	stderr, _ := cmd.StderrPipe()
+	cmd.Start()
+
+	scanner := bufio.NewScanner(stderr)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		m := scanner.Text()
+		fmt.Println(m)
+	}
+	cmd.Wait()
 }
