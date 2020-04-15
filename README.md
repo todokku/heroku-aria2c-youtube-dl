@@ -41,6 +41,6 @@ $ shadowsocks-local -s 127.0.0.1 -p 8388 -m rc4-md5 -k foobar -l 1080
 Point your SOCKS5 clients to `127.0.0.1:1080`
 
 ```
-$ curl --socks5 127.0.0.1:1080 ifconfig.co
+$  curl --socks5 127.0.0.1:1080 ifconfig.co
 54.204.99.36
 ```
